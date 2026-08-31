@@ -1,4 +1,4 @@
-package models;
+package com.cinema.constructor.models;
 
 import java.util.Set;
 import java.util.TreeSet;
