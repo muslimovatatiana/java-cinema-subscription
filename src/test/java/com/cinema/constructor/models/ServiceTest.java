@@ -1,4 +1,4 @@
-package models;
+package com.cinema.constructor.models;
 
 import org.junit.jupiter.api.Test;
 
