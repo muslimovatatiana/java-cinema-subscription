@@ -19,25 +19,10 @@ public class SubscriptionTest {
     }
 
     private Set<Service> getDefaultServices() {
-        Set<Service> services = new HashSet<>();
-        services.add(Service.builder()
-                .id(1L)
-                .name("Услуга 1")
-                .basePrice(100.0)
-                .quality(Service.Quality.HD)
-                .build());
-        services.add(Service.builder()
-                .id(2L)
-                .name("Услуга 2")
-                .basePrice(400.0)
-                .quality(Service.Quality.FHD)
-                .build());
-        services.add(Service.builder()
-                .id(3L)
-                .name("Услуга 3")
-                .basePrice(500.0)
-                .quality(Service.Quality.UHD)
-                .build());
-        return services;
+        return Set.of(
+                Service.builder().id(1L).name("Услуга 1").basePrice(100.0).quality(Service.Quality.HD).build(),
+                Service.builder().id(2L).name("Услуга 2").basePrice(400.0).quality(Service.Quality.FHD).build(),
+                Service.builder().id(3L).name("Услуга 3").basePrice(500.0).quality(Service.Quality.UHD).build()
+        );
     }
 }
