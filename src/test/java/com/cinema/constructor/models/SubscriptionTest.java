@@ -28,8 +28,6 @@ public class SubscriptionTest {
 
     @Test
     void shouldThrowExceptionWhenNotExistServices() {
-        Subscription subscription = new Subscription(null);
-
-        assertThrows(IllegalArgumentException.class,() -> subscription.calculateMonthlyCost());
+        assertThrows(IllegalArgumentException.class,() -> new Subscription(null));
     }
 }
