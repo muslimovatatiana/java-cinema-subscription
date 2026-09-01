@@ -2,7 +2,6 @@ package com.cinema.constructor.models;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,9 +19,9 @@ public class SubscriptionTest {
 
     private Set<Service> getDefaultServices() {
         return Set.of(
-                Service.builder().id(1L).name("Услуга 1").basePrice(100.0).quality(Service.Quality.HD).build(),
-                Service.builder().id(2L).name("Услуга 2").basePrice(400.0).quality(Service.Quality.FHD).build(),
-                Service.builder().id(3L).name("Услуга 3").basePrice(500.0).quality(Service.Quality.UHD).build()
+                Service.builder().basePrice(100.0).build(),
+                Service.builder().basePrice(400.0).build(),
+                Service.builder().basePrice(500.0).build()
         );
     }
 }

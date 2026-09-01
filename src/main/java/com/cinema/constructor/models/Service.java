@@ -60,10 +60,10 @@ public class Service {
     }
 
     public static class Builder {
-        private long id;
-        private String name;
-        private double basePrice;
-        private Quality quality;
+        private long id = 999L;
+        private String name = "Услуга по умолчанию";
+        private double basePrice = 0.0;
+        private Quality quality = Quality.HD;
 
         public Builder id(long id) {
             this.id = id;
