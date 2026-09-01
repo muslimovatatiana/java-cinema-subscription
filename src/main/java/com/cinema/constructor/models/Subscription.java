@@ -21,4 +21,8 @@ public class Subscription {
                 .mapToDouble(Service::getBasePrice)
                 .sum();
     }
+
+    public Set<Service> getServices() {
+        return services;
+    }
 }

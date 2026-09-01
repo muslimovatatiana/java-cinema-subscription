@@ -11,22 +11,40 @@ public class SubscriptionTest {
 
     @Test
     void shouldCalculateSum1000_When3ServicesProvided() {
-        Set<Service> services = getDefaultServices();
-        Subscription subscription = new Subscription(services);
-
-        double sum = subscription.calculateMonthlyCost();
+        double sum = getDefaultSubscription().calculateMonthlyCost();
 
         assertEquals(1000.0, sum);
     }
 
     @Test
+    void shouldReturnCount3_When3ServicesProvided() {
+        int count = getDefaultSubscription().getServices().size();
+
+        assertEquals(3, count);
+    }
+
+    @Test
     void shouldThrowException_WhenServicesIsNull() {
-        assertThrows(NullPointerException.class,() -> new Subscription(null));
+        assertThrows(NullPointerException.class, () -> new Subscription(null));
     }
 
     @Test
     void shouldThrowException_WhenServicesIsEmpty() {
-        assertThrows(IllegalArgumentException.class,() -> new Subscription(Set.of()));
+        assertThrows(IllegalArgumentException.class, () -> new Subscription(Set.of()));
+    }
+
+    @Test
+    void shouldThrowException_WhenAttemptingToModifyServicesList() {
+        Subscription subscription = getDefaultSubscription();
+        Set<Service> subscriptionServices = subscription.getServices();
+        Set<Service> modificationServices = getDefaultServices();
+
+        assertThrows(UnsupportedOperationException.class, () ->
+                subscriptionServices.addAll(modificationServices));
+    }
+
+    private Subscription getDefaultSubscription() {
+        return new Subscription(getDefaultServices());
     }
 
     private Set<Service> getDefaultServices() {
