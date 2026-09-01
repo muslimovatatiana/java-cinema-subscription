@@ -7,72 +7,46 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ServiceTest {
 
-    private final long defaultId = 1L;
-    private final String defaultName = "Услуга";
-    private final double defaultBasePrice = 100.0;
-    private final Service.Quality defaultQuality = Service.Quality.HD;
-
     @Test
-    void shouldCreateServiceWhenCallBuilder() {
+    void shouldCreateServiceWithCorrectFields_WhenAllDataProvided() {
         Service service = Service.builder()
-                .id(defaultId)
-                .name(defaultName)
-                .basePrice(defaultBasePrice)
-                .quality(defaultQuality)
+                .id(1L)
+                .name("Тест")
+                .basePrice(100.0)
+                .quality(Service.Quality.HD)
                 .build();
 
-        assertEquals(defaultId, service.getId());
-        assertEquals(defaultName, service.getName());
-        assertEquals(defaultBasePrice, service.getBasePrice());
-        assertEquals(defaultQuality, service.getQuality());
+        assertEquals(1L, service.getId());
+        assertEquals("Тест", service.getName());
+        assertEquals(100.0, service.getBasePrice());
+        assertEquals(Service.Quality.HD, service.getQuality());
     }
 
     @Test
-    void given2ServicesWhenIdEqualsThenHashCodesEquals() {
-        Service service1 = Service.builder()
-                .id(defaultId)
-                .name(defaultName)
-                .basePrice(defaultBasePrice)
-                .quality(defaultQuality)
-                .build();
-        Service service2 = Service.builder()
-                .id(service1.getId())
-                .name(service1.getName())
-                .basePrice(service1.getBasePrice())
-                .quality(service1.getQuality())
-                .build();
+    void shouldBeEqualAndHaveSameHashCode_WhenObjectsAreIdentical() {
+        Service service1 = Service.builder().build();
+        Service service2 = Service.builder().build();
 
         assertEquals(service1, service2);
         assertEquals(service1.hashCode(), service2.hashCode());
     }
 
     @Test
-    void shouldThrowExceptionWhenNameIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> Service.builder()
-                .id(defaultId)
-                .name(null)
-                .basePrice(defaultBasePrice)
-                .quality(defaultQuality)
-                .build());
+    void shouldThrowException_WhenNameIsNull() {
+        assertThrows(IllegalArgumentException.class, () ->
+                Service.builder().name(null).build()
+        );
     }
 
     @Test
-    void shouldThrowExceptionWhenQualityIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> Service.builder()
-                .id(defaultId)
-                .name(defaultName)
-                .basePrice(defaultBasePrice)
-                .quality(null)
-                .build());
+    void shouldThrowException_WhenQualityIsNull() {
+        assertThrows(IllegalArgumentException.class, () ->
+                Service.builder().quality(null).build());
     }
 
     @Test
-    void shouldThrowExceptionWhenBasePriceIsNegative() {
-        assertThrows(IllegalArgumentException.class, () -> Service.builder()
-                .id(defaultId)
-                .name(defaultName)
-                .basePrice(-1.0)
-                .quality(defaultQuality)
-                .build());
+    void shouldThrowException_WhenBasePriceIsNegative() {
+        assertThrows(IllegalArgumentException.class, () ->
+                Service.builder().basePrice(-1.0).build());
     }
 }
