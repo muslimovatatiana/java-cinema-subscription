@@ -6,6 +6,10 @@ public class Subscription {
     private final Set<Service> services;
 
     public Subscription(Set<Service> services) {
+        if (services == null) {
+            throw new IllegalArgumentException("Список услуг не может быть null");
+        }
+
         this.services = Set.copyOf(services);
     }
 
