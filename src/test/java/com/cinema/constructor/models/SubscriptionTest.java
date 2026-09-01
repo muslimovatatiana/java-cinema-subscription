@@ -24,4 +24,11 @@ public class SubscriptionTest {
                 Service.builder().basePrice(500.0).build()
         );
     }
+
+    @Test
+    void givenSubscriptionWhenNotExistsServicesThenSum0() {
+        Subscription subscription = new Subscription(null);
+
+        assertEquals(0.0, subscription.calculateMonthlyCost());
+    }
 }
