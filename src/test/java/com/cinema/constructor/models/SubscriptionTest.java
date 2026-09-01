@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SubscriptionTest {
 
@@ -26,9 +27,9 @@ public class SubscriptionTest {
     }
 
     @Test
-    void givenSubscriptionWhenNotExistsServicesThenSum0() {
+    void shouldThrowExceptionWhenNotExistServices() {
         Subscription subscription = new Subscription(null);
 
-        assertEquals(0.0, subscription.calculateMonthlyCost());
+        assertThrows(IllegalArgumentException.class,() -> subscription.calculateMonthlyCost());
     }
 }
