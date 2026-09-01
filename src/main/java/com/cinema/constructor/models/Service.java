@@ -4,12 +4,24 @@ import java.util.Objects;
 
 public class Service {
 
-    private long id;
-    private String name;
-    private double basePrice;
-    private Quality quality;
+    private final long id;
+    private final String name;
+    private final double basePrice;
+    private final Quality quality;
 
     private Service(long id, String name, double basePrice, Quality quality) {
+        if (name == null) {
+            throw new IllegalArgumentException("Имя услуги не может быть null");
+        }
+
+        if (quality == null) {
+            throw new IllegalArgumentException("Качество услуги не может быть null");
+        }
+
+        if (basePrice < 0) {
+            throw new IllegalArgumentException("Цена услуги не может быть отрицательной");
+        }
+
         this.id = id;
         this.name = name;
         this.basePrice = basePrice;
@@ -38,6 +50,7 @@ public class Service {
 
     @Override
     public boolean equals(Object object) {
+        if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Service service = (Service) object;
         return id == service.id
@@ -60,10 +73,10 @@ public class Service {
     }
 
     public static class Builder {
-        private long id;
-        private String name;
-        private double basePrice;
-        private Quality quality;
+        private long id = 999L;
+        private String name = "Услуга по умолчанию";
+        private double basePrice = 0.0;
+        private Quality quality = Quality.HD;
 
         public Builder id(long id) {
             this.id = id;
@@ -86,18 +99,6 @@ public class Service {
         }
 
         public Service build() {
-            if (this.name == null) {
-                throw new IllegalArgumentException("Имя услуги не может быть null");
-            }
-
-            if (this.quality == null) {
-                throw new IllegalArgumentException("Качество услуги не может быть null");
-            }
-
-            if (this.basePrice < 0) {
-                throw new IllegalArgumentException("Цена услуги не может быть отрицательной");
-            }
-
             return new Service(this.id, this.name, this.basePrice, this.quality);
         }
     }
